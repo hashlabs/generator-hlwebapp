@@ -92,6 +92,7 @@ module.exports = function (grunt) {
             return [
               connect.static('.tmp'),
               connect().use('/bower_components', connect.static('./bower_components')),
+              connect().use('/fonts', connect.static('./bower_components/font-awesome/fonts')),
               connect.static(config.app)
             ];
           }
@@ -366,6 +367,14 @@ module.exports = function (grunt) {
             '{,*/}*.html',
             'styles/fonts/{,*/}*.*'
           ]
+        },
+        {
+          expand: true,
+          dot: true,
+          cwd: 'bower_components/font-awesome/fonts/',
+          src: ['*.*'],
+          dest: '<%= config.dist %>/fonts'
+
         }<% if (includeBootstrap) { %>, {
           expand: true,
           dot: true,
@@ -426,6 +435,43 @@ module.exports = function (grunt) {
         'imagemin',
         'svgmin'
       ]
+    },
+
+    // Upload to S3
+    aws: (grunt.file.exists('aws.json') ? grunt.file.readJSON('aws.json') : {}),
+    aws_s3: {
+      options: {
+        accessKeyId: '<%= aws.key %>',
+        secretAccessKey: '<%= aws.secret %>',
+        uploadConcurrency: 5,
+        downloadConcurrency: 5,
+        access: 'public-read'
+      },
+      clean_prod: {
+        options: {
+          bucket: '<%= aws.bucket %>'
+        },
+        files: [
+          {dest: '/', action: 'delete'},
+        ]
+      },
+      dist: {
+        options: {
+          bucket: '<%= aws.bucket %>',
+          differential: true,
+          mime: {
+            '<%= config.dist %>/styles/*.css': 'text/css'
+          }
+        },
+        files: [
+          {
+          expand: true,
+          cwd: '<%= config.dist %>',
+          src: ['**'],
+          dest: ''
+        }
+        ]
+      }
     }
   });
 
@@ -483,6 +529,11 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('deploy', [
+    'build',
+    'aws_s3:dist'
   ]);
 
   grunt.registerTask('default', [

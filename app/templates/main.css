@@ -5,6 +5,12 @@
   padding: 0.2em 0;
 }
 
+$icon-font-path: '/fonts/';
+$fa-font-path: '/fonts';
+
+@import "../../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+@import "../../bower_components/font-awesome/scss/font-awesome.scss";
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
