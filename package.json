@@ -3,7 +3,7 @@
   "version": "0.5.0-1",
   "description": "Scaffold out a front-end web app",
   "license": "BSD",
-  "repository": "yeoman/generator-webapp",
+  "repository": "hashlabs/generator-hlwebapp",
   "author": "The Yeoman Team",
   "main": "app/index.js",
   "engines": {

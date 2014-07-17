@@ -24,7 +24,6 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
-
     // Project settings
     config: config,
 
@@ -441,15 +440,15 @@ module.exports = function (grunt) {
     aws: (grunt.file.exists('aws.json') ? grunt.file.readJSON('aws.json') : {}),
     aws_s3: {
       options: {
-        accessKeyId: '<%= aws.key %>',
-        secretAccessKey: '<%= aws.secret %>',
+        accessKeyId: '<%%= aws.key %>',
+        secretAccessKey: '<%%= aws.secret %>',
         uploadConcurrency: 5,
         downloadConcurrency: 5,
         access: 'public-read'
       },
       clean_prod: {
         options: {
-          bucket: '<%= aws.bucket %>'
+          bucket: '<%%= aws.bucket %>'
         },
         files: [
           {dest: '/', action: 'delete'},
@@ -457,10 +456,10 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
-          bucket: '<%= aws.bucket %>',
+          bucket: '<%%= aws.bucket %>',
           differential: true,
           mime: {
-            '<%= config.dist %>/styles/*.css': 'text/css'
+            '<%%= config.dist %>/styles/*.css': 'text/css'
           }
         },
         files: [
