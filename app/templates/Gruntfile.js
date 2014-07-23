@@ -372,18 +372,18 @@ module.exports = function (grunt) {
           dot: true,
           cwd: 'bower_components/font-awesome/fonts/',
           src: ['*.*'],
-          dest: '<%= config.dist %>/fonts'
+          dest: '<%%= config.dist %>/fonts'
 
         }<% if (includeBootstrap) { %>, {
           expand: true,
           dot: true,
           cwd: '<% if (includeSass) {
-              %>.<%
+              %>bower_components/bootstrap-sass-official/assets/fonts/bootstrap/<%
             } else {
               %>bower_components/bootstrap/dist<%
             } %>',
           src: '<% if (includeSass) {
-              %>bower_components/bootstrap-sass-official/assets/fonts/bootstrap/*<%
+              %>[\'*.*\']*<%
             } else {
               %>fonts/*<%
             } %>',
