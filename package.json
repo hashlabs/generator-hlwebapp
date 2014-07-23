@@ -1,6 +1,6 @@
 {
   "name": "generator-hlwebapp",
-  "version": "0.5.0-4",
+  "version": "0.5.0-5",
   "description": "Scaffold out a front-end web app",
   "license": "BSD",
   "repository": "hashlabs/generator-hlwebapp",

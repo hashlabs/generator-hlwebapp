@@ -464,11 +464,11 @@ module.exports = function (grunt) {
         },
         files: [
           {
-          expand: true,
-          cwd: '<%= config.dist %>',
-          src: ['**'],
-          dest: ''
-        }
+            expand: true,
+            cwd: '<%%= config.dist %>',
+            src: ['**'],
+            dest: ''
+          }
         ]
       }
     }
